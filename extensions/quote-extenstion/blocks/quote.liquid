@@ -1,0 +1,276 @@
+<div id="quote-form-wrapper" class="quote-form-block">
+  <div id="form-loader" class="form-loader" style="display: none;">
+    <div class="spinner"></div>
+  </div>
+
+  <form id="custom-quote-form" novalidate>
+    <input type="hidden" name="shop_domain" value="{{ shop.domain }}">
+    <input type="hidden" name="product_title" value="{{ product.title }}">
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+    <input type="hidden" name="product_price" value="{{ product.price | money_without_currency }}">
+    <input type="hidden" name="product_image" value="{{ product.featured_image.src | img_url: 'master' }}">
+
+    <h2 style="color: #fff; font-weight: 600; margin-top: 0px; margin-bottom: 20px;">Quote me <i>SUPER FAST!!</i></h2>
+
+    <div>
+      <label>Full Name <span>*</span></label>
+      <input type="text" name="full_name" class="quote-required">
+      <span class="error-message"></span>
+    </div>
+
+    <div>
+      <label>Company <span>*</span></label>
+      <input type="text" name="company" class="quote-required">
+      <span class="error-message"></span>
+    </div>
+
+    <div>
+      <label>Message <span>*</span></label>
+      <textarea name="message" rows="4" class="quote-required"></textarea>
+      <span class="error-message"></span>
+    </div>
+
+    <div>
+      <label>Quantity <span>*</span></label>
+      <input type="number" name="quantity" min="1" class="quote-required">
+      <span class="error-message"></span>
+    </div>
+
+    <div>
+      <label>Email <span>*</span></label>
+      <input type="text" name="email" class="quote-required quote-email">
+      <span class="error-message"></span>
+    </div>
+
+    <div>
+      <label>Phone Number <span>*</span></label>
+      <input type="text" name="phone" class="quote-required quote-phone">
+      <span class="error-message"></span>
+    </div>
+
+    <button type="button" id="submit-quote-btn">
+      <span class="btn-text">Submit Quote</span>
+    </button>
+  </form>
+
+  <div id="quote-form-response" style="margin-top: 10px;"></div>
+</div>
+
+<style>
+  .error-message {
+    color: #8B0000;
+    font-size: 14px;
+    display: block;
+    margin-top: -10px;
+}
+
+  .form-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #fd6506;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: block !important;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  #custom-quote-form {
+    background: #fd6506 !important;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  #custom-quote-form input, 
+  #custom-quote-form textarea {
+    width: 100%;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  #custom-quote-form label {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  #custom-quote-form #submit-quote-btn {
+    margin-top: 15px;
+    background-color: #0a6cdc;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("Quote form block loaded.");
+    const form = document.getElementById("custom-quote-form");
+    const submitBtn = document.getElementById("submit-quote-btn");
+    const responseBox = document.getElementById("quote-form-response");
+    const loader = document.getElementById("form-loader");
+
+    submitBtn.addEventListener("click", function () {
+      console.log("Submit quote button clicked.");
+      loader.style.display = "flex"; // Show form loader
+
+      let isValid = true;
+      responseBox.innerHTML = ""; // Clear previous messages
+
+      const requiredFields = form.querySelectorAll(".quote-required");
+      requiredFields.forEach(field => {
+        const errorMessage = field.nextElementSibling;
+        errorMessage.textContent = ""; // Reset error messages
+        field.style.border = "1px solid #fff";
+
+        if (field.value.trim() === "") {
+          field.style.border = "1px solid red";
+          errorMessage.textContent = "This field is required.";
+          isValid = false;
+        }
+      });
+
+      // Validate email
+      const emailField = form.querySelector(".quote-email");
+      const emailVal = emailField.value.trim();
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailVal)) {
+        emailField.style.border = "1px solid red";
+        emailField.nextElementSibling.textContent = "Please enter a valid email.";
+        isValid = false;
+      }
+
+      // Validate phone number
+      const phoneField = form.querySelector(".quote-phone");
+      const phoneVal = phoneField.value.trim();
+      const phonePattern = /^[0-9]{10,15}$/;
+      if (!phonePattern.test(phoneVal)) {
+        phoneField.style.border = "1px solid red";
+        phoneField.nextElementSibling.textContent = "Please enter a valid phone number (10-15 digits).";
+        isValid = false;
+      }
+
+      // Validate quantity
+      const quantityField = form.querySelector("input[name='quantity']");
+      if (quantityField.value.trim() === "" || parseInt(quantityField.value) <= 0) {
+        quantityField.style.border = "1px solid red";
+        quantityField.nextElementSibling.textContent = "Please enter a valid quantity.";
+        isValid = false;
+      }
+
+      if (!isValid) {
+        loader.style.display = "none"; // Hide loader if validation fails
+        responseBox.innerHTML = `<p style="color: red;">Please fix the errors above.</p>`;
+        return;
+      }
+
+      // Prepare form data
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      // Submit form via AJAX
+      fetch("https://papers-norway-hebrew-baghdad.trycloudflare.com/api/submit-quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (response.ok) {
+          responseBox.innerHTML = `<p style="color: green;">Thank you! Your quote has been submitted.</p>`;
+          form.reset();
+        } else {
+          throw new Error("Form submission failed.");
+        }
+      })
+      .catch(error => {
+        responseBox.innerHTML = `<p style="color: red;">Something went wrong. Please try again later.</p>`;
+        console.error(error);
+      })
+      .finally(() => {
+        loader.style.display = "none"; // Hide loader after submission completes
+      });
+    });
+  });
+</script>
+
+
+
+{% schema %}
+{
+  "name": "Quote Form Block",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form Heading",
+      "default": "Request a Quote"
+    },
+    {
+      "type": "text",
+      "id": "full_name_field",
+      "label": "Field Name - Full Name",
+      "default": "full_name"
+    },
+    {
+      "type": "text",
+      "id": "company_field",
+      "label": "Field Name - Company",
+      "default": "company"
+    },
+    {
+      "type": "text",
+      "id": "message_field",
+      "label": "Field Name - Message",
+      "default": "message"
+    },
+    {
+      "type": "text",
+      "id": "quantity_field",
+      "label": "Field Name - Quantity",
+      "default": "quantity"
+    },
+    {
+      "type": "text",
+      "id": "email_field",
+      "label": "Field Name - Email",
+      "default": "email"
+    },
+    {
+      "type": "text",
+      "id": "phone_field",
+      "label": "Field Name - Phone",
+      "default": "phone"
+    }
+  ]
+}
+{% endschema %}
+
