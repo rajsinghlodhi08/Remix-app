@@ -3,7 +3,7 @@
 client_id = "ba04dd390f9e37084b3d0e3c5620afcb"
 name = "repots"
 handle = "repots"
-application_url = "http://147.182.233.164/"
+application_url = "http://147.182.233.164"
 embedded = true
 
 [build]
