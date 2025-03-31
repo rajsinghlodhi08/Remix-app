@@ -3,11 +3,11 @@
 client_id = "ba04dd390f9e37084b3d0e3c5620afcb"
 name = "repots"
 handle = "repots"
-application_url = "https://fingers-validity-theory-reserved.trycloudflare.com"
+application_url = "http://147.182.233.164/"
 embedded = true
 
 [build]
-automatically_update_urls_on_dev = true
+automatically_update_urls_on_dev = false
 dev_store_url = "r-t-dev.myshopify.com"
 include_config_on_deploy = true
 
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://fingers-validity-theory-reserved.trycloudflare.com/auth/callback",
-  "https://fingers-validity-theory-reserved.trycloudflare.com/auth/shopify/callback",
-  "https://fingers-validity-theory-reserved.trycloudflare.com/api/auth/callback"
+  "http://147.182.233.164/auth/callback",
+  "http://147.182.233.164/auth/shopify/callback",
+  "http://147.182.233.164/api/auth/callback"
 ]
 
 [webhooks]
