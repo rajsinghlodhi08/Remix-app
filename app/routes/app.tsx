@@ -11,7 +11,6 @@ export const links = () => [{ rel: "stylesheet", href: polarisStyles }];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
-
   return { apiKey: process.env.SHOPIFY_API_KEY || "" };
 };
 
@@ -24,7 +23,8 @@ export default function App() {
         <Link to="/app" rel="home">
           Home
         </Link>
-        <Link to="/app/additional">Additional page</Link>
+        <Link to="/app/bulk-price">Add Bulk Price</Link>
+        <Link to="/app/bulk-listing">Bulk Listing</Link>
       </NavMenu>
       <Outlet />
     </AppProvider>

@@ -195,9 +195,8 @@
       formData.forEach((value, key) => {
         data[key] = value;
       });
-
       // Submit form via AJAX
-      fetch("https://papers-norway-hebrew-baghdad.trycloudflare.com/api/submit-quote", {
+      fetch("https://app.promoforbusiness.com/api/submit-quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
