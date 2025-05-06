@@ -3,7 +3,7 @@
 client_id = "ba04dd390f9e37084b3d0e3c5620afcb"
 name = "repots"
 handle = "repots"
-application_url = "https://performer-nu-moments-tu.trycloudflare.com"
+application_url = "https://recovery-mileage-aug-por.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://performer-nu-moments-tu.trycloudflare.com/auth/callback",
-  "https://performer-nu-moments-tu.trycloudflare.com/auth/shopify/callback",
-  "https://performer-nu-moments-tu.trycloudflare.com/api/auth/callback"
+  "https://recovery-mileage-aug-por.trycloudflare.com/auth/callback",
+  "https://recovery-mileage-aug-por.trycloudflare.com/auth/shopify/callback",
+  "https://recovery-mileage-aug-por.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
