@@ -17,12 +17,12 @@ interface EmailOptions {
 export async function sendEmail({userType, to, subject, text, html }: EmailOptions) {
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || "smtp.purelymail.com",    //"smtp.gmail.com",
+      host: process.env.SMTP_HOST || "smtp-relay.brevo.com",    //"smtp.gmail.com",
       port: 465,
       secure: true, // use SSL
       auth: {
-        user: process.env.SMTP_USER ||  "pfb@promoforbusiness.com", //"mtesting359@gmail.com",
-        pass: process.env.SMTP_PASS ||  "nuvwiq-xyshoj-qYjzo0", //"yeuj lqvc szqj wtiv",
+        user: process.env.SMTP_USER ||  "889f63001@smtp-brevo.com", //"mtesting359@gmail.com",
+        pass: process.env.SMTP_PASS ||  "T0Nf4h5dxB6GqazU", //"yeuj lqvc szqj wtiv",
       },
       tls: {
         rejectUnauthorized: false, // This can help avoid SSL/TLS issues

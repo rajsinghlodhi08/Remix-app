@@ -101,6 +101,8 @@ const adminEmailResponse = await sendEmail({
 </table>`,
 });
 if (!adminEmailResponse.success) {
+  console.error("❌ Email failed to send:", adminEmailResponse.error);
+  console.log("Image URL:", formData.product_image);
   return withCors(json({ success: false, error: "Failed to send email" }, { status: 500 }));
 }
 // Send email to User (confirmation email)
@@ -172,6 +174,7 @@ const userEmailResponse = await sendEmail({
 `,
 });
   if (!userEmailResponse.success) {
+    console.error("❌ Email failed to send:", userEmailResponse.error);
     return withCors(json({ success: false, error: "Failed to send email" }, { status: 500 }));
   }
   const response = json({ success: true, data: saved });

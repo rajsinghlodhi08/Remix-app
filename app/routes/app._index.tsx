@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import type { ActionFunctionArgs, LoaderFunctionArgs ,} from "@remix-run/node";
 import { json, useFetcher ,redirect } from "@remix-run/react";
 import { useLoaderData, Form } from "@remix-run/react";
-import {Page, IndexTable,  useIndexResourceState, useBreakpoints, Text, Card} from "@shopify/polaris";
+import {Page, LegacyCard, IndexTable,  useIndexResourceState, useBreakpoints,Badge,DataTable, Layout, Text, Card, Button, BlockStack, Box, List, Link, InlineStack} from "@shopify/polaris";
 import { TitleBar, useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
 import db  from "../db.server";
@@ -17,6 +17,7 @@ interface Quote {
   email: string;
   telephone: string;
 }
+
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   // Fetch all quotes from the database
@@ -94,7 +95,7 @@ export default function Index() {
 
   return (
     <Page title="quotes" fullWidth> 
-    <Card>
+    <LegacyCard>
       <IndexTable
         condensed={useBreakpoints().smDown}
         resourceName={resourceName}
@@ -120,7 +121,7 @@ export default function Index() {
       >
         {rowMarkup}
       </IndexTable>
-    </Card>
+    </LegacyCard>
     </Page>
   );
 }
