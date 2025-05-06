@@ -1,25 +1,26 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "ba04dd390f9e37084b3d0e3c5620afcb"
-name = "repots"
-handle = "repots"
-application_url = "https://recovery-mileage-aug-por.trycloudflare.com"
+
+client_id = "256a5609d48f6540443ac393520d1810"
+name = "b2b-quote"
+handle = "b2b-quote"
+application_url = "https://app.promoforbusiness.com"
 embedded = true
 
 [build]
-automatically_update_urls_on_dev = true
-dev_store_url = "r-t-dev.myshopify.com"
+automatically_update_urls_on_dev = false
+dev_store_url = "promoforbusiness.myshopify.com"
 include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = read_customers,read_orders,read_products,write_customers,write_discounts,write_discounts_allocator_functions,write_orders,write_products"
 
 [auth]
 redirect_urls = [
-  "https://recovery-mileage-aug-por.trycloudflare.com/auth/callback",
-  "https://recovery-mileage-aug-por.trycloudflare.com/auth/shopify/callback",
-  "https://recovery-mileage-aug-por.trycloudflare.com/api/auth/callback"
+  "https://app.promoforbusiness.com/auth/callback",
+  "https://app.promoforbusiness.com/auth/shopify/callback",
+  "https://app.promoforbusiness.com/api/auth/callback"
 ]
 
 [webhooks]
