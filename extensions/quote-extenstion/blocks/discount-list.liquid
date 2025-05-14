@@ -6,8 +6,7 @@
   <table class="discount-table">
     <thead>
       <tr>
-        <th>Min Quantity</th>
-        <th>Max Quantity</th>
+        <th>Quantity</th>
         <th>Discount (%)</th>
       </tr>
     </thead>
@@ -279,8 +278,7 @@
           .map(
             (discount) => `
             <tr class="discount-row" data-min="${discount.min}" data-max="${discount.max}" data-percentage="${discount.percentage}">
-              <td>${discount.min}</td>
-              <td>${discount.max}</td>
+              <td>${discount.min}-${discount.max}</td>
               <td>${discount.percentage}%</td>
             </tr>
           `
