@@ -2,6 +2,7 @@ import { json } from "@remix-run/node";
 import { withCors } from "../utils/cors.server";
 import db from "../db.server"; // assuming this is your Prisma DB setup
 import { sendEmail } from "../utils/sendEmail";
+import { sendEmailSengrid } from "../utils/sendEmailSengrid";
 import PDFDocument from "pdfkit";
 import { PassThrough } from "stream";
 import fs from "fs";
@@ -34,7 +35,7 @@ export const action = async ({ request }: any) => {
   console.log("Quote saved:", formData.product_image);
   
   // Send email to Admin
-const adminEmailResponse = await sendEmail({
+const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
   to: "rajsinghlodhi08@gmail.com", // Admin email
   subject: "New Quote Request",
@@ -60,7 +61,7 @@ const adminEmailResponse = await sendEmail({
             <p>We have received your request and will get back to you soon.</p>
           </td>
           <td align="right">
-            <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/ecb2bdc9-85c4-4e0f-b64b-e933a6452d94-min.png?v=1742981379"  style="display: block; width: 330px; " />
+            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png"  style="display: block; width: 330px; " />
           </td>
         </tr>
       </table>
@@ -78,7 +79,7 @@ const adminEmailResponse = await sendEmail({
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>
           <td>
-            <img src="https://promoforbusiness.com/${formData.product_image}" alt="Product Image" width="200px" style="display: block;" />
+            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
           </td>
           <td>
             <p><strong>${formData.product_title}</strong></p>
@@ -106,7 +107,7 @@ if (!adminEmailResponse.success) {
   return withCors(json({ success: false, error: "Failed to send email" }, { status: 500 }));
 }
 // Send email to User (confirmation email)
-const userEmailResponse = await sendEmail({
+const userEmailResponse = await sendEmailSengrid({
   userType: "customer",
   to: 'mtesting359@gmail.com', //formData.email, // User's email
   subject: "Your Quote Request Received",
@@ -132,7 +133,7 @@ const userEmailResponse = await sendEmail({
             <p>We have received your request and will get back to you soon.</p>
           </td>
           <td align="right">
-            <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/ecb2bdc9-85c4-4e0f-b64b-e933a6452d94-min.png?v=1742981379"  style="display: block; width: 330px; " />
+            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png"  style="display: block; width: 330px; " />
           </td>
         </tr>
       </table>
@@ -150,7 +151,7 @@ const userEmailResponse = await sendEmail({
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>
           <td>
-            <img src="${formData.product_image}" alt="Product Image" width="200px" style="display: block;" />
+            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
           </td>
           <td>
             <p><strong>${formData.product_title}</strong></p>
