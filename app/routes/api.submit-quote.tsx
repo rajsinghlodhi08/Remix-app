@@ -2,6 +2,7 @@ import { json } from "@remix-run/node";
 import { withCors } from "../utils/cors.server";
 import db from "../db.server"; // assuming this is your Prisma DB setup
 import { sendEmail } from "../utils/sendEmail";
+import { sendEmailSengrid } from "../utils/sendEmailSengrid";
 import PDFDocument from "pdfkit";
 import { PassThrough } from "stream";
 import fs from "fs";
@@ -34,7 +35,7 @@ export const action = async ({ request }: any) => {
   console.log("Quote saved:", formData.product_image);
   
   // Send email to Admin
-const adminEmailResponse = await sendEmail({
+const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
   to: "rajsinghlodhi08@gmail.com", // Admin email
   subject: "New Quote Request",
@@ -106,7 +107,7 @@ if (!adminEmailResponse.success) {
   return withCors(json({ success: false, error: "Failed to send email" }, { status: 500 }));
 }
 // Send email to User (confirmation email)
-const userEmailResponse = await sendEmail({
+const userEmailResponse = await sendEmailSengrid({
   userType: "customer",
   to: 'mtesting359@gmail.com', //formData.email, // User's email
   subject: "Your Quote Request Received",
