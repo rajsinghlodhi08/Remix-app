@@ -61,7 +61,7 @@ const adminEmailResponse = await sendEmailSengrid({
             <p>We have received your request and will get back to you soon.</p>
           </td>
           <td align="right">
-            <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/ecb2bdc9-85c4-4e0f-b64b-e933a6452d94-min.png?v=1742981379"  style="display: block; width: 330px; " />
+            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png"  style="display: block; width: 330px; " />
           </td>
         </tr>
       </table>
@@ -79,7 +79,7 @@ const adminEmailResponse = await sendEmailSengrid({
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>
           <td>
-            <img src="https://promoforbusiness.com/${formData.product_image}" alt="Product Image" width="200px" style="display: block;" />
+            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
           </td>
           <td>
             <p><strong>${formData.product_title}</strong></p>
@@ -133,7 +133,7 @@ const userEmailResponse = await sendEmailSengrid({
             <p>We have received your request and will get back to you soon.</p>
           </td>
           <td align="right">
-            <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/ecb2bdc9-85c4-4e0f-b64b-e933a6452d94-min.png?v=1742981379"  style="display: block; width: 330px; " />
+            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png"  style="display: block; width: 330px; " />
           </td>
         </tr>
       </table>
@@ -151,7 +151,7 @@ const userEmailResponse = await sendEmailSengrid({
       <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>
           <td>
-            <img src="${formData.product_image}" alt="Product Image" width="200px" style="display: block;" />
+            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
           </td>
           <td>
             <p><strong>${formData.product_title}</strong></p>
