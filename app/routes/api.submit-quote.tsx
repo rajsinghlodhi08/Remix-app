@@ -34,7 +34,7 @@ export const action = async ({ request }: any) => {
   });
   console.log("Quote saved:", formData.product_image);
   
-  // Send email to Admin
+  // Send email to sendEmailSengrid
 const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
   to: "rajsinghlodhi08@gmail.com", // Admin email
