@@ -12,7 +12,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 export async function sendEmailSengrid({ userType, to, subject, text, html }: EmailOptions) {
   const msg = {
-    to: "rajsinghlodhi08@gmail.com", // ✅ receiver
+    to: to, // ✅ receiver
     from: "rajendra.s@ultratend.com", // ✅ MUST BE VERIFIED in SendGrid
     subject,
     text,

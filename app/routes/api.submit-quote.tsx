@@ -37,7 +37,7 @@ export const action = async ({ request }: any) => {
   // Send email to Admin
 const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
-  to: "rajsinghlodhi08@gmail.com", // Admin email
+  to: "anamika.b@ultratend.com", // Admin email
   subject: "New Quote Request",
   text: `New quote request from ${formData.full_name} (${formData.email}).\n\nProduct: ${formData.product_title}\nQuantity: ${formData.quantity}\nPrice: ${formData.product_price}\nCompany: ${formData.company}\nMessage: ${formData.message}`,
   html: `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 730px; margin: 0 auto; background: #fd650614; border-radius: 10px; padding: 20px;">
@@ -109,71 +109,63 @@ if (!adminEmailResponse.success) {
 // Send email to User (confirmation email)
 const userEmailResponse = await sendEmailSengrid({
   userType: "customer",
-  to: 'mtesting359@gmail.com', //formData.email, // User's email
+  to: "anamika.b@ultratend.com", // Replace with formData.email for production
   subject: "Your Quote Request Received",
-  text: `Hello ${formData.full_name},\n\nThank you for requesting a quote. We have received your request and will get back to you soon.\n\nProduct: ${formData.product_title}\nQuantity: ${formData.quantity}\nPrice: ${formData.product_price}\nCompany: ${formData.company}\nMessage: ${formData.message}\n\nBest regards,\nYour Company`,
-  html: `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 730px; margin: 0 auto; background: #fd650614; border-radius: 10px; padding: 20px;">
+  text: `Hello ${formData.full_name},
+
+Thank you for requesting a quote. We have received your request and will get back to you soon.
+
+Product: ${formData.product_title}
+Quantity: ${formData.quantity}
+Price: ${formData.product_price}
+Company: ${formData.company}
+Message: ${formData.message}
+
+Best regards,
+Your Company`,
+  html: `
+<table width="100%" cellpadding="0" cellspacing="0" style="max-width: 700px; margin: auto; background-color: #f9f9f9; border-radius: 10px; font-family: Arial, sans-serif; padding: 20px;">
   <tr>
     <td align="center">
-      <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png?v=1740660920&width=110px" / width="110px">
+    <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
     </td>
   </tr>
   <tr>
     <td>
-      <hr>
-      <h2>Hello<span style="color: #fd6506;">  ${formData.full_name},</span></h2>
+      <h2 style="color: #333;">Hello <span style="color: #fd6506;">${formData.full_name}</span>,</h2>
+      <p>Thank you for requesting a quote. We have received your request and will get back to you soon.</p>
     </td>
   </tr>
   <tr>
-    <td>
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+    <td style="padding: 15px 0;">
+      // <h3 style="margin: 0;">Quote Details</h3>
+      // <hr style="border: none; border-top: 1px solid #ddd; margin: 10px 0;">
+      <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
-          <td align="left" style="padding-right: 20px;">
-            <h1>Thank you for requesting a quote.</h1>
-            <p>We have received your request and will get back to you soon.</p>
+          <td style="vertical-align: top; padding-right: 10px;">
+          <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
           </td>
-          <td align="right">
-            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png"  style="display: block; width: 330px; " />
+          <td style="vertical-align: top;">
+            <p><strong>Product:</strong> ${formData.product_title}</p>
+            <p><strong>Quantity:</strong> ${formData.quantity}</p>
+            <p><strong>Price:</strong> ${formData.product_price}</p>
+            <p><strong>Company:</strong> ${formData.company}</p>
+            <p><strong>Message:</strong> ${formData.message}</p>
           </td>
         </tr>
       </table>
     </td>
   </tr>
   <tr>
-    <td align="center">
-      <p>01 APR 2025 10:50:30 AM PDT</p>
-      <h1>Quote Request Received</h1>
-    </td>
-  </tr>
-  <tr>
     <td>
-      <hr>
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-        <tr>
-          <td>
-            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
-          </td>
-          <td>
-            <p><strong>${formData.product_title}</strong></p>
-            <p><b>Quantity:</b> ${formData.quantity}</p>
-            <p><b>Price:</b> ${formData.product_price}</p>
-          </td>
-        </tr>
-      </table>
-      <hr>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p><b>Company:</b> ${formData.company}</p>
-      <p><b>Message:</b> ${formData.message}</p>
-      <p>Best regards,<br>Your Company</p>
+      <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
+      <p style="color: #555;">Best regards,<br>Your Company</p>
     </td>
   </tr>
 </table>
-
 `,
 });
+
   if (!userEmailResponse.success) {
     console.error("❌ Email failed to send:", userEmailResponse.error);
     return withCors(json({ success: false, error: "Failed to send email" }, { status: 500 }));
