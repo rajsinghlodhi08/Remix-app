@@ -3,7 +3,7 @@
 client_id = "ba04dd390f9e37084b3d0e3c5620afcb"
 name = "repots"
 handle = "repots"
-application_url = "https://infringement-learn-paraguay-robot.trycloudflare.com"
+application_url = "https://big-due-adjustment-companies.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "read_products,write_products,read_orders,write_orders,read_customers,w
 
 [auth]
 redirect_urls = [
-  "https://infringement-learn-paraguay-robot.trycloudflare.com/auth/callback",
-  "https://infringement-learn-paraguay-robot.trycloudflare.com/auth/shopify/callback",
-  "https://infringement-learn-paraguay-robot.trycloudflare.com/api/auth/callback"
+  "https://big-due-adjustment-companies.trycloudflare.com/auth/callback",
+  "https://big-due-adjustment-companies.trycloudflare.com/auth/shopify/callback",
+  "https://big-due-adjustment-companies.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
@@ -40,7 +40,5 @@ proxy_url = "https://infringement-learn-paraguay-robot.trycloudflare.com"
   prefix = "/apps/discounts"
   destination = "/api/discounts"
 
-
 [pos]
 embedded = false
-
