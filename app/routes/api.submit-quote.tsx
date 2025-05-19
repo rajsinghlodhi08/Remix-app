@@ -2,6 +2,7 @@ import { json } from "@remix-run/node";
 import { withCors } from "../utils/cors.server";
 import db from "../db.server"; // assuming this is your Prisma DB setup
 import { sendEmail } from "../utils/sendEmail";
+import { sendEmailSengrid } from "../utils/sendEmailSengrid";
 import PDFDocument from "pdfkit";
 import { PassThrough } from "stream";
 import fs from "fs";
@@ -34,7 +35,7 @@ export const action = async ({ request }: any) => {
   console.log("Quote saved:", formData.product_image);
   
   // Send email to Admin
-const adminEmailResponse = await sendEmail({
+const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
   to: "rajsinghlodhi08@gmail.com", // Admin email
   subject: "New Quote Request",
@@ -106,9 +107,9 @@ if (!adminEmailResponse.success) {
   return withCors(json({ success: false, error: "Failed to send email" }, { status: 500 }));
 }
 // Send email to User (confirmation email)
-const userEmailResponse = await sendEmail({
+const userEmailResponse = await sendEmailSengrid({
   userType: "customer",
-  to: 'mtesting359@gmail.com', //formData.email, // User's email
+  to:'mtesting359@gmail.com', //formData.email, // User's email
   subject: "Your Quote Request Received",
   text: `Hello ${formData.full_name},\n\nThank you for requesting a quote. We have received your request and will get back to you soon.\n\nProduct: ${formData.product_title}\nQuantity: ${formData.quantity}\nPrice: ${formData.product_price}\nCompany: ${formData.company}\nMessage: ${formData.message}\n\nBest regards,\nYour Company`,
   html: `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 730px; margin: 0 auto; background: #fd650614; border-radius: 10px; padding: 20px;">
