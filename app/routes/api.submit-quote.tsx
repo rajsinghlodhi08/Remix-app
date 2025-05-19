@@ -37,69 +37,328 @@ export const action = async ({ request }: any) => {
   // Send email to Admin
 const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
-  to: "anamika.b@ultratend.com", // Admin email
+  to: "rajsinghlodhi08@gmail.com", // Admin email
   subject: "New Quote Request",
   text: `New quote request from ${formData.full_name} (${formData.email}).\n\nProduct: ${formData.product_title}\nQuantity: ${formData.quantity}\nPrice: ${formData.product_price}\nCompany: ${formData.company}\nMessage: ${formData.message}`,
-  html: `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 730px; margin: 0 auto; background: #fd650614; border-radius: 10px; padding: 20px;">
-  <tr>
-    <td align="center">
-      <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png?v=1740660920&width=110px" width="110px">
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <hr>
-      <h2>Hello<span style="color: #fd6506;">  ${formData.full_name},</span></h2>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+  html: `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Quotation Email</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      background: #fff;
+      margin: 20px auto;
+      /* padding: 20px; */
+      border: 1px solid #ddd;
+    }
+    .banner-top {
+      text-align: right;
+      color: white;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .banner-top1 {
+      background-color: #f07f20;
+      padding: 20px;
+    }    
+    .greeting {
+      padding: 0px 0px 0px 20px;
+      
+    }
+    .logo {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .logo img {
+      max-height: 50px;
+    }
+    .mid-banner img {
+      width: 100%;
+      border-radius: 4px;
+    }
+    .quote-box {
+      padding: 20px;
+    }
+    .quote-box h2 {
+      background-color: #00a4d6;
+      color: white;
+      padding: 10px;
+      font-size: 18px;
+    }
+    .product-img {
+      max-width: 100px;
+      margin: 10px 0;
+    }
+    .quote-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    .quote-table th, .quote-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    .quote-table th {
+      background-color: #f07f20;
+      color: white;
+    }
+    .totals {
+      margin-top: 10px;
+    }
+    .terms {
+      background-color: #f07f20;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .terms-text {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+    .header {
+      background-color: #007ca3;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 14px;
+    }
+    .meta div {
+      width: 48%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #007ca3;
+      color: white;
+    }
+    .subtotal-section {
+      background-color: #d8ecf1;
+      font-weight: bold;
+    }
+    .calc-box {
+      margin-top: 20px;
+      background-color: #007ca3;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+    }
+    .calc-box + div {
+      background-color: #f9f9f9;
+      padding: 10px;
+      font-size: 13px;
+    }
+    .name-heading {
+      position: absolute;
+      margin-top: -27px;
+      padding: 0px 0px 0px 20px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="banner-top1">
+        
+    </div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;border: none;">
+    <tr>
+        <td style="padding: 0; width: 60%; vertical-align: middle;border: none">
+        <p style="margin: 0; padding: 75px 20px 0px 20px; font-weight: bold; font-style: italic; color: black;">
+            Dear Ms. Rebecca E. McNeal
+        </p>
+        </td>
+        <td style="padding: 0; width: 40%; text-align: right;border: none">
+        <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/know_your_qoute.png?v=1747661075" alt="Know Your Quote" style="max-width: 100%; height: auto;" />
+        </td>
+     </tr>
+    </table>
+
+    <div class="greeting">
+      <p>Greetings!</p>
+      <p>Thank you for reaching out to us regarding your service inquiry. We are pleased to provide you with the following quotation tailored to your needs.</p>
+      <p>I'm excited to make this happen. Please feel free to reach out whenever you have further concerns.</p>
+      <p>Best regards,<br><strong>Mr. Asim</strong><br>Product Advisor<br>Contact: (44) 20 3807 9480</p>
+    </div>
+
+    <div class="logo">
+      <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/Logo_14235b7e-d36a-4a7a-b850-45c37d5c16a7.png?v=1747661075" alt="PromoForBusiness Logo" />
+    </div>
+
+    <div class="mid-banner">
+      <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/upper-banner.png?v=1747661077" alt="Product Showcase" />
+    </div>
+
+    <div class="quote-box">
+     <div class="header">QUOTE EVALUATION</div>
+        <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 10px;">
         <tr>
-          <td align="left" style="padding-right: 20px;">
-            <h1>Thank you for requesting a quote.</h1>
-            <p>We have received your request and will get back to you soon.</p>
-          </td>
-          <td align="right">
-            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png"  style="display: block; width: 330px; " />
-          </td>
+            <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
+              <strong>PREPARED FOR:</strong> Ms. Rebecca E. McNeal
+            </td>
+            <td style="padding: 8px 0; font-size: 14px;border:none;"> 
+              <strong> DATE:</strong> May 3, 2025    
+            </td>
         </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <p>01 APR 2025 10:50:30 AM PDT</p>
-      <h1>Quote Request Received</h1>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <hr>
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>
-          <td>
-            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
-          </td>
-          <td>
-            <p><strong>${formData.product_title}</strong></p>
-            <p><b>Quantity:</b> ${formData.quantity}</p>
-            <p><b>Price:</b> ${formData.product_price}</p>
-          </td>
+            <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
+              <strong>PREPARED BY:</strong> Mr. Asim
+            </td>
+            <td style="border:none; padding: 8px 0; font-size: 14px;">
+                <a href="mailto:hello@promoforbusiness.com" style="color: #007ca3; text-decoration: none;">
+                hello@promoforbusiness.com
+                </a>
+           </td>
         </tr>
-      </table>
-      <hr>
-    </td>
-  </tr>
-  <tr>
-    <td>
-    <p><b>Email:</b> ${formData.email}</p>
-      <p><b>Company:</b> ${formData.company}</p>
-      <p><b>Message:</b> ${formData.message}</p>
-      <p>Best regards,<br>Your Company</p>
-    </td>
-  </tr>
-</table>`,
+        </table>
+        <table border="1" cellpadding="8" cellspacing="0" style="margin-bottom: 30px;">
+          <thead>
+            <tr>
+              <th colspan="2" style="text-align: left;">Services - ITEM ORDERED:</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primary Backpacks</td>
+              <td>
+                <img src="logo.png" alt="Product" class="product-image" style="max-width: 200px; margin-top: 5px;" />
+            </tr>
+          </tbody>
+        </table>
+        <div class="highlight-bar"></div>
+        <table>
+        <thead>
+            <tr>
+            <th>ITEM CODE</th>
+            <th>UNIT PRICE</th>
+            <th>QUANTITY</th>
+            <th>SERVICE TOTAL PRICE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>BG01040</td>
+            <td>$22.97</td>
+            <td>100</td>
+            <td>$2297.00</td>
+            </tr>
+            <tr>
+            <td>MG01007</td>
+            <td>$14.00</td>
+            <td>1</td>
+            <td>$14.00</td>
+            </tr>
+            <tr>
+            <td>PEN01035</td>
+            <td>$35.00</td>
+            <td>1</td>
+            <td>$35.00</td>
+            </tr>
+            <tr class="subtotal-section">
+            <td colspan="3">SUBTOTAL</td>
+            <td>$2346.95</td>
+            </tr>
+            <tr class="subtotal-section">
+            <td colspan="3">DISCOUNT</td>
+            <td>2.70%</td>
+            </tr>
+            <tr class="subtotal-section">
+            <td colspan="3">TAX</td>
+            <td>5%</td>
+            </tr>
+            <tr class="subtotal-section" style="background-color:#007ca3; color:white;">
+            <td colspan="3">GRAND SERVICE TOTAL PRICE</td>
+            <td>$2399.90</td>
+            </tr>
+        </tbody>
+        </table>
+        <div class="calc-box">CALCULATION</div>
+        <div>
+        UNIT PRICE * QUANTITY = SERVICE TOTAL PRICE<br>
+        SUM OF ALL SERVICE PRICE – DISCOUNT + TAX = GRAND SERVICE TOTAL PRICE
+        </div>
+    </div>
+
+    <div class="terms">TERMS AND CONDITIONS</div>
+    <div class="terms-text">
+      <div><strong>1. Quotation:</strong>
+        <p> Orders are accepted subject to our right to adjust prices quoted to take account of any changes in the
+            law or Government regulations requiring us to increase prices by way of direct taxation, import duties,
+            customs and excise duties or otherwise. The prices are based on today's current costs of production
+            and in the event of any increase in wages or costs of materials to us occurring after the confirmation
+            or accepted contract, we shall be entitled to charge such increases to you. All quotations are valid at
+            the time of quoting, error and omissions excluded.
+        </p>
+    </div>
+      <div><strong>2. Price:</strong> 
+        <p>Where applicable all prices are subject to VAT at the current rate. Prices quoted on this website are guide
+        prices only subject to viewing final artwork. Once artwork and full specifications have been finalised, a
+        quotation price will be confirmed. In most cases pricing is for non-branded items, without setup costs,
+        printing costs, shipping and handling fees, and any other potential product specific costs. We aim to keep
+        our pricing 100% accurate, however due to the fast-paced industry and nature of the online consumer
+        product industry a small number of items on our website may be mis-priced due to updates. Whilst we aim
+        to notify you at point of sale or enquiry, we reserve the right to alter our pricing without notice and refuse
+        or cancel any orders placed on mis-priced product.</p>
+     </div>
+      <div><strong>3. Terms of Payment:</strong>
+        <p> Payment shall be made in full within 30 days of receiving an invoice, unless we have agreed special settlement
+            terms in writing. New Accounts - On all orders full payment is required on order placement. Credit is available
+            subject to three positive payments on a pro-forma basis, alongside satisfactory credit checks.
+            Pro forma invoices are due for payment immediately upon order placement. Production of orders will not
+            begin until the invoice has been paid in full. Delay in payment can cause delay in the overall lead time for your
+            order. EverythingBranded cannot be held responsible for failure to fulfil a delivery date as a result of late payment.
+        </p>
+      </div>
+      <div><strong>4. Confidentiality:</strong>
+        <p> All information in this quotation statement should always be kept confidential by both parties.</p>
+      </div>
+       <div><strong>5. Governing Law:</strong> 
+        This quotation statement strictly observes all relevant industry standards and state laws. In circumstances of
+        disputes, complications, or other forms of fraudulent activities, due process will take over.</p>
+        </div>
+    </div>
+    <div class="">
+        <div class="terms">CONTACT DETAILS </div>
+        <div class="terms-text">
+            <p><strong>Mr Asim</strong></p>
+            <p>71-75 Shelton Street London, WC2H 9JQ, UK Call us at (44) 20 3807 9480 Email: hello@promoforbusiness.com</p>
+        </div>
+        <div class="logo">
+            <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/Logo_14235b7e-d36a-4a7a-b850-45c37d5c16a7.png?v=1747661075" alt="PromoForBusiness Logo" />
+        </div>
+        <div class="mid-banner">
+        <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/bottom-banner.png?v=1747661077" alt="Product Showcase" />
+        </div>  
+    </div>
+  </div>
+</body>
+</html>
+`,
 });
 if (!adminEmailResponse.success) {
   console.error("❌ Email failed to send:", adminEmailResponse.error);
@@ -109,89 +368,318 @@ if (!adminEmailResponse.success) {
 // Send email to User (confirmation email)
 const userEmailResponse = await sendEmailSengrid({
   userType: "customer",
-  to: "anamika.b@ultratend.com", // Replace with formData.email for production
+  to: "mtesting359@gmail.com", // Replace with formData.email for production
   subject: "Your Quote Request Received",
-  text: `Hello ${formData.full_name},
-
-Thank you for requesting a quote. We have received your request and will get back to you soon.
-
-Product: ${formData.product_title}
-Quantity: ${formData.quantity}
-Price: ${formData.product_price}
-Company: ${formData.company}
-Message: ${formData.message}
-
-Best regards,
-Your Company`,
+  text: `Hello ${formData.full_name}`,
   html: `
-<table width="100%" cellpadding="0" cellspacing="0" style="max-width: 700px; margin: auto; background-color: #f9f9f9; border-radius: 10px; font-family: Arial, sans-serif; padding: 20px;">
-  <tr>
-    <td align="center">
-    <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <h2 style="color: #333;">Hello <span style="color: #fd6506;">${formData.full_name}</span>,</h2>
-      <p>Thank you for requesting a quote. We have received your request and will get back to you soon.</p>
-    </td>
-  </tr>
-  <tr>
-    <td style="padding: 15px 0;">
-      // <h3 style="margin: 0;">Quote Details</h3>
-      // <hr style="border: none; border-top: 1px solid #ddd; margin: 10px 0;">
-      <table width="100%" cellpadding="0" cellspacing="0">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Quotation Email</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      background: #fff;
+      margin: 20px auto;
+      /* padding: 20px; */
+      border: 1px solid #ddd;
+    }
+    .banner-top {
+      text-align: right;
+      color: white;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .banner-top1 {
+      background-color: #f07f20;
+      padding: 20px;
+    }    
+    .greeting {
+      padding: 0px 0px 0px 20px;
+      
+    }
+    .logo {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .logo img {
+      max-height: 50px;
+    }
+    .mid-banner img {
+      width: 100%;
+      border-radius: 4px;
+    }
+    .quote-box {
+      padding: 20px;
+    }
+    .quote-box h2 {
+      background-color: #00a4d6;
+      color: white;
+      padding: 10px;
+      font-size: 18px;
+    }
+    .product-img {
+      max-width: 100px;
+      margin: 10px 0;
+    }
+    .quote-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    .quote-table th, .quote-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    .quote-table th {
+      background-color: #f07f20;
+      color: white;
+    }
+    .totals {
+      margin-top: 10px;
+    }
+    .terms {
+      background-color: #f07f20;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .terms-text {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+    .header {
+      background-color: #007ca3;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 14px;
+    }
+    .meta div {
+      width: 48%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #007ca3;
+      color: white;
+    }
+    .subtotal-section {
+      background-color: #d8ecf1;
+      font-weight: bold;
+    }
+    .calc-box {
+      margin-top: 20px;
+      background-color: #007ca3;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+    }
+    .calc-box + div {
+      background-color: #f9f9f9;
+      padding: 10px;
+      font-size: 13px;
+    }
+    .name-heading {
+      position: absolute;
+      margin-top: -27px;
+      padding: 0px 0px 0px 20px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="banner-top1">
+        
+    </div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse;border: none;">
+    <tr>
+        <td style="padding: 0; width: 60%; vertical-align: middle;border: none">
+        <p style="margin: 0; padding: 75px 20px 0px 20px; font-weight: bold; font-style: italic; color: black;">
+            Dear Ms. Rebecca E. McNeal
+        </p>
+        </td>
+        <td style="padding: 0; width: 40%; text-align: right;border: none">
+        <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/know_your_qoute.png?v=1747661075" alt="Know Your Quote" style="max-width: 100%; height: auto;" />
+        </td>
+     </tr>
+    </table>
+    <div class="greeting">
+      <p>Greetings!</p>
+      <p>Thank you for reaching out to us regarding your service inquiry. We are pleased to provide you with the following quotation tailored to your needs.</p>
+      <p>I'm excited to make this happen. Please feel free to reach out whenever you have further concerns.</p>
+      <p>Best regards,<br><strong>Mr. Asim</strong><br>Product Advisor<br>Contact: (44) 20 3807 9480</p>
+    </div>
+
+    <div class="logo">
+      <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/know_your_qoute.png?v=1747661075" alt="PromoForBusiness Logo" />
+    </div>
+
+    <div class="mid-banner">
+      <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/upper-banner.png?v=1747661077" alt="Product Showcase" />
+    </div>
+
+    <div class="quote-box">
+     <div class="header">QUOTE EVALUATION</div>
+        <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 10px;">
         <tr>
-          <td style="vertical-align: top; padding-right: 10px;">
-          <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
-          </td>
-<<<<<<< HEAD
-          <td align="right">
-            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png"  style="display: block; width: 330px; " />
-=======
-          <td style="vertical-align: top;">
-            <p><strong>Product:</strong> ${formData.product_title}</p>
-            <p><strong>Quantity:</strong> ${formData.quantity}</p>
-            <p><strong>Price:</strong> ${formData.product_price}</p>
-            <p><strong>Company:</strong> ${formData.company}</p>
-            <p><strong>Message:</strong> ${formData.message}</p>
->>>>>>> 5fcf3aaeeacc95573cafc9e9d04da8ded31c1260
-          </td>
+            <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
+              <strong>PREPARED FOR:</strong> Ms. Rebecca E. McNeal
+            </td>
+            <td style="padding: 8px 0; font-size: 14px;border:none;"> 
+              <strong> DATE:</strong> May 3, 2025    
+            </td>
         </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td>
-<<<<<<< HEAD
-      <hr>
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
         <tr>
-          <td>
-            <img src="https://promoforbusiness.com/cdn/shop/files/pfb_logo.png" alt="Product Image" width="200px" style="display: block;" />
-          </td>
-          <td>
-            <p><strong>${formData.product_title}</strong></p>
-            <p><b>Quantity:</b> ${formData.quantity}</p>
-            <p><b>Price:</b> ${formData.product_price}</p>
-          </td>
+            <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
+              <strong>PREPARED BY:</strong> Mr. Asim
+            </td>
+            <td style="border:none; padding: 8px 0; font-size: 14px;">
+                <a href="mailto:hello@promoforbusiness.com" style="color: #007ca3; text-decoration: none;">
+                hello@promoforbusiness.com
+                </a>
+           </td>
         </tr>
-      </table>
-      <hr>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <p><b>Company:</b> ${formData.company}</p>
-      <p><b>Message:</b> ${formData.message}</p>
-      <p>Best regards,<br>Your Company</p>
-=======
-      <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
-      <p style="color: #555;">Best regards,<br>Your Company</p>
->>>>>>> 5fcf3aaeeacc95573cafc9e9d04da8ded31c1260
-    </td>
-  </tr>
-</table>
+        </table>
+        <table border="1" cellpadding="8" cellspacing="0" style="margin-bottom: 30px;">
+          <thead>
+            <tr>
+              <th colspan="2" style="text-align: left;">Services - ITEM ORDERED:</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primary Backpacks</td>
+              <td>
+                <img src="logo.png" alt="Product" class="product-image" style="max-width: 200px; margin-top: 5px;" />
+            </tr>
+          </tbody>
+        </table>
+        <div class="highlight-bar"></div>
+        <table>
+        <thead>
+            <tr>
+            <th>ITEM CODE</th>
+            <th>UNIT PRICE</th>
+            <th>QUANTITY</th>
+            <th>SERVICE TOTAL PRICE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>BG01040</td>
+            <td>$22.97</td>
+            <td>100</td>
+            <td>$2297.00</td>
+            </tr>
+            <tr>
+            
+            <tr class="subtotal-section">
+            <td colspan="3">SUBTOTAL</td>
+            <td>$2346.95</td>
+            </tr>
+            <tr class="subtotal-section">
+            <td colspan="3">DISCOUNT</td>
+            <td>2.70%</td>
+            </tr>
+            <tr class="subtotal-section">
+            <td colspan="3">TAX</td>
+            <td>5%</td>
+            </tr>
+            <tr class="subtotal-section" style="background-color:#007ca3; color:white;">
+            <td colspan="3">GRAND SERVICE TOTAL PRICE</td>
+            <td>$2399.90</td>
+            </tr>
+        </tbody>
+        </table>
+        <div class="calc-box">CALCULATION</div>
+        <div>
+        UNIT PRICE * QUANTITY = SERVICE TOTAL PRICE<br>
+        SUM OF ALL SERVICE PRICE – DISCOUNT + TAX = GRAND SERVICE TOTAL PRICE
+        </div>
+    </div>
+
+    <div class="terms">TERMS AND CONDITIONS</div>
+    <div class="terms-text">
+      <div><strong>1. Quotation:</strong>
+        <p> Orders are accepted subject to our right to adjust prices quoted to take account of any changes in the
+            law or Government regulations requiring us to increase prices by way of direct taxation, import duties,
+            customs and excise duties or otherwise. The prices are based on today's current costs of production
+            and in the event of any increase in wages or costs of materials to us occurring after the confirmation
+            or accepted contract, we shall be entitled to charge such increases to you. All quotations are valid at
+            the time of quoting, error and omissions excluded.
+        </p>
+    </div>
+      <div><strong>2. Price:</strong> 
+        <p>Where applicable all prices are subject to VAT at the current rate. Prices quoted on this website are guide
+        prices only subject to viewing final artwork. Once artwork and full specifications have been finalised, a
+        quotation price will be confirmed. In most cases pricing is for non-branded items, without setup costs,
+        printing costs, shipping and handling fees, and any other potential product specific costs. We aim to keep
+        our pricing 100% accurate, however due to the fast-paced industry and nature of the online consumer
+        product industry a small number of items on our website may be mis-priced due to updates. Whilst we aim
+        to notify you at point of sale or enquiry, we reserve the right to alter our pricing without notice and refuse
+        or cancel any orders placed on mis-priced product.</p>
+     </div>
+      <div><strong>3. Terms of Payment:</strong>
+        <p> Payment shall be made in full within 30 days of receiving an invoice, unless we have agreed special settlement
+            terms in writing. New Accounts - On all orders full payment is required on order placement. Credit is available
+            subject to three positive payments on a pro-forma basis, alongside satisfactory credit checks.
+            Pro forma invoices are due for payment immediately upon order placement. Production of orders will not
+            begin until the invoice has been paid in full. Delay in payment can cause delay in the overall lead time for your
+            order. EverythingBranded cannot be held responsible for failure to fulfil a delivery date as a result of late payment.
+        </p>
+      </div>
+      <div><strong>4. Confidentiality:</strong>
+        <p> All information in this quotation statement should always be kept confidential by both parties.</p>
+      </div>
+       <div><strong>5. Governing Law:</strong> 
+        This quotation statement strictly observes all relevant industry standards and state laws. In circumstances of
+        disputes, complications, or other forms of fraudulent activities, due process will take over.</p>
+        </div>
+    </div>
+    <div class="">
+        <div class="terms">CONTACT DETAILS </div>
+        <div class="terms-text">
+            <p><strong>Mr Asim</strong></p>
+            <p>71-75 Shelton Street London, WC2H 9JQ, UK Call us at (44) 20 3807 9480 Email: hello@promoforbusiness.com</p>
+        </div>
+        <div class="logo">
+            <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/Logo_14235b7e-d36a-4a7a-b850-45c37d5c16a7.png?v=1747661075" alt="PromoForBusiness Logo" />
+        </div>
+        <div class="mid-banner">
+        <img src="https://cdn.shopify.com/s/files/1/0867/2444/4507/files/bottom-banner.png?v=1747661077" alt="Product Showcase" />
+        </div>  
+    </div>
+  </div>
+</body>
+</html>
+
 `,
 });
 
