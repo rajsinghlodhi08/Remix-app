@@ -4,6 +4,7 @@
   </div>
 
   <form id="custom-quote-form" novalidate>
+    <input type="hidden" name="sku" value="{{ shop.sku }}">
     <input type="hidden" name="shop_domain" value="{{ shop.domain }}">
     <input type="hidden" name="product_title" value="{{ product.title }}">
     <input type="hidden" name="product_id" value="{{ product.id }}">
@@ -11,7 +12,6 @@
     <input type="hidden" name="product_image" value="{{ product.featured_image.src | img_url: 'master' }}">
 
     <h2 style="color: #fff; font-weight: 600; margin-top: 0px; margin-bottom: 20px;">Quote me <i>SUPER FAST!!</i></h2>
-
     <div>
       <label>Full Name <span>*</span></label>
       <input type="text" name="full_name" class="quote-required">

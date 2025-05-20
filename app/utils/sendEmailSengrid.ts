@@ -10,10 +10,11 @@ interface EmailOptions {
 }
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
+
 export async function sendEmailSengrid({ userType, to, subject, text, html }: EmailOptions) {
   const msg = {
-    from: `"Your Business" <rajendra.s@ultratend.com>`,
     to: to, // ✅ receiver
+    from: "rajendra.s@ultratend.com", // ✅ MUST BE VERIFIED in SendGrid
     subject,
     text,
     html,

@@ -41,7 +41,5 @@ proxy_url = "https://app.promoforbusiness.com"
   prefix = "/apps/discounts"
   destination = "/api/discounts"
 
-
 [pos]
 embedded = false
-
