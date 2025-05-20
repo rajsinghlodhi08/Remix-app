@@ -389,7 +389,7 @@ if (!adminEmailResponse.success) {
 const userEmailResponse = await sendEmailSengrid({
   userType: "customer",
   to: "rajsinghlodhi08@gmail.com", // Replace with formData.email for production
-  subject: "Your Quote Request Received",
+  subject: "Know Your Quote Evaluation",
   text: `Hello ${formData.full_name}`,
   html: `<!DOCTYPE html>
 <html>

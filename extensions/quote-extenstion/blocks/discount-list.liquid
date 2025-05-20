@@ -315,9 +315,9 @@
             // Update cart with discount information           
             try {
               // First, validate the data
-              if (!window.variantId) {
+              {% comment %} if (!window.variantId) {
                 throw new Error('Product variant ID not found');
-              }
+              } {% endcomment %}
 
               // Prepare the cart update data
               const cartUpdateData = {
