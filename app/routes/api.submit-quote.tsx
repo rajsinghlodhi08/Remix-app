@@ -3,6 +3,7 @@ import { withCors } from "../utils/cors.server";
 import db from "../db.server"; // assuming this is your Prisma DB setup
 import { sendEmail } from "../utils/sendEmail";
 import { sendEmailSengrid } from "../utils/sendEmailSengrid";
+import discount from "../../extensions/product-discount/src/discount.json";
 import PDFDocument from "pdfkit";
 import { PassThrough } from "stream";
 import fs from "fs";
@@ -14,6 +15,7 @@ export const loader = async ({ request }: any) => {
   }
   return withCors(new Response("Only POST allowed", { status: 405 }));
 };
+
 
 export const action = async ({ request }: any) => {
   const formData = await request.json();
@@ -33,14 +35,24 @@ export const action = async ({ request }: any) => {
     },
   });
 const imageUrl = `https:${formData.product_image}`;
-
-
-  console.log("Quote saved:", formData.product_image);
+const quantity = parseInt(formData.quantity, 10);
+  const discountTier = discount.discounts.find(
+    tier => quantity >= tier.min && quantity <= tier.max
+  );
   
+  const discountPercentage = discountTier ? discountTier.percentage : 0;
+  const discountAmount = (parseFloat(formData.product_price) * discountPercentage) / 100;
+  console.log("Discount Amount:", discountAmount);
+
+  const totalPrice = parseFloat(formData.product_price) * quantity - discountAmount;
+  console.log("Total Price:", totalPrice);
+  const totalTax = (totalPrice * 0.05).toFixed(2); // Assuming a 5% tax rate
+  const grandTotal = (totalPrice + parseFloat(totalTax)).toFixed(2);
+
   // Send email to Admin
 const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
-  to: "anamika.b@ultratend.com", // Admin email
+  to: "rajsinghlodhi08@gmail.com", // Admin email
   subject: "New Quote Request",
   text: `New quote request from ${formData.full_name} (${formData.email}).\n\nProduct: ${formData.product_title}\nQuantity: ${formData.quantity}\nPrice: ${formData.product_price}\nCompany: ${formData.company}\nMessage: ${formData.message}`,
   html: `<!DOCTYPE html>
@@ -225,7 +237,23 @@ const adminEmailResponse = await sendEmailSengrid({
               <strong>PREPARED FOR:</strong> ${formData.full_name}
             </td>
             <td style="padding: 8px 0; font-size: 14px;border:none;"> 
-              <strong> DATE:</strong>${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} 
+              <strong> DATE :</strong>${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} 
+            </td>
+        </tr>
+         <tr>
+            <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
+              <strong>Company :</strong> ${formData.company}
+            </td>
+            <td style="padding: 8px 0; font-size: 14px;border:none;"> 
+              <strong> Email :</strong>${formData.email} 
+            </td>
+        </tr>
+         <tr>
+            <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
+              <strong>Phone Number :</strong> ${formData.phone}
+            </td>
+            <td style="padding: 8px 0; font-size: 14px;border:none;"> 
+              <strong> Message:</strong>${formData.message} 
             </td>
         </tr>
         <tr>
@@ -265,21 +293,21 @@ const adminEmailResponse = await sendEmailSengrid({
         </thead>
         <tbody>
             <tr>
-            <td>BG01040</td>
-            <td>${formData.product_price}</td>
+            <td>${formData.sku}</td>
+            <td>$ ${formData.product_price}</td>
             <td>${formData.quantity}</td>
-            <td>${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
+            <td>$ ${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
             </tr>
             <tr>
            
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">SUBTOTAL</td>
-            <td>${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
+            <td>$ ${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">DISCOUNT</td>
-            <td>2.70%</td>
+            <td>${discountPercentage}%</td>
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">TAX</td>
@@ -287,7 +315,7 @@ const adminEmailResponse = await sendEmailSengrid({
             </tr>
             <tr class="subtotal-section" style="background-color:#007ca3; color:white;">
             <td colspan="3">GRAND SERVICE TOTAL PRICE</td>
-            <td>$2399.90</td>
+            <td>$ ${grandTotal}</td>
             </tr>
         </tbody>
         </table>
@@ -361,7 +389,7 @@ if (!adminEmailResponse.success) {
 // Send email to User (confirmation email)
 const userEmailResponse = await sendEmailSengrid({
   userType: "customer",
-  to: "anamika.b@ultratend.com", // Replace with formData.email for production
+  to: "rajsinghlodhi08@gmail.com", // Replace with formData.email for production
   subject: "Your Quote Request Received",
   text: `Hello ${formData.full_name}`,
   html: `<!DOCTYPE html>
@@ -550,6 +578,22 @@ const userEmailResponse = await sendEmailSengrid({
         </tr>
         <tr>
             <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
+              <strong>Company :</strong> ${formData.company}
+            </td>
+            <td style="padding: 8px 0; font-size: 14px;border:none;"> 
+              <strong> Email :</strong>${formData.email} 
+            </td>
+        </tr>
+         <tr>
+            <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
+              <strong>Phone Number :</strong> ${formData.phone}
+            </td>
+            <td style="padding: 8px 0; font-size: 14px;border:none;"> 
+              <strong> Message:</strong>${formData.message} 
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
               <strong>PREPARED BY:</strong> Mr. Asim
             </td>
             <td style="border:none; padding: 8px 0; font-size: 14px;">
@@ -585,20 +629,20 @@ const userEmailResponse = await sendEmailSengrid({
         </thead>
         <tbody>
             <tr>
-            <td>BG01040</td>
-            <td>${formData.product_price}</td>
+            <td>${formData.sku}</td>
+            <td>$ ${formData.product_price}</td>
             <td>${formData.quantity}</td>
-            <td>${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
+            <td>$ ${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
             </tr>
             <tr>
             
             <tr class="subtotal-section">
             <td colspan="3">SUBTOTAL</td>
-            <td>${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
+            <td>$ ${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">DISCOUNT</td>
-            <td>2.70%</td>
+            <td>${discountPercentage}%</td>
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">TAX</td>
@@ -606,7 +650,7 @@ const userEmailResponse = await sendEmailSengrid({
             </tr>
             <tr class="subtotal-section" style="background-color:#007ca3; color:white;">
             <td colspan="3">GRAND SERVICE TOTAL PRICE</td>
-            <td>$2399.90</td>
+            <td>$ ${grandTotal}</td>
             </tr>
         </tbody>
         </table>

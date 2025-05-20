@@ -4,6 +4,7 @@
   </div>
 
   <form id="custom-quote-form" novalidate>
+    <input type="hidden" name="sku" value="{{ shop.sku }}">
     <input type="hidden" name="shop_domain" value="{{ shop.domain }}">
     <input type="hidden" name="product_title" value="{{ product.title }}">
     <input type="hidden" name="product_id" value="{{ product.id }}">
@@ -197,7 +198,7 @@
       });
 
       // Submit form via AJAX
-      fetch("https://big-due-adjustment-companies.trycloudflare.com/api/submit-quote", {
+      fetch("https://phentermine-le-atm-timothy.trycloudflare.com/api/submit-quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
