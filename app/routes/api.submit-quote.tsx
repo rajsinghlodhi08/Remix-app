@@ -45,7 +45,7 @@ const quantity = parseInt(formData.quantity, 10);
 
   const totalPrice = parseFloat(formData.product_price) * quantity - discountAmount;
   console.log("Total Price:", totalPrice);
-  const totalTax = (totalPrice * 0.05).toFixed(2); // Assuming a 5% tax rate
+  const totalTax = (totalPrice * 0.20).toFixed(2); // Assuming a 5% tax rate
   const grandTotal = (totalPrice + parseFloat(totalTax)).toFixed(2);
 
   // Send email to Admin
