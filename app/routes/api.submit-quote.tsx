@@ -32,12 +32,15 @@ export const action = async ({ request }: any) => {
       price: String(formData.product_price),
     },
   });
+const imageUrl = `https:${formData.product_image}`;
+
+
   console.log("Quote saved:", formData.product_image);
   
   // Send email to Admin
 const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
-  to: "rajsinghlodhi08@gmail.com", // Admin email
+  to: "anamika.b@ultratend.com", // Admin email
   subject: "New Quote Request",
   text: `New quote request from ${formData.full_name} (${formData.email}).\n\nProduct: ${formData.product_title}\nQuantity: ${formData.quantity}\nPrice: ${formData.product_price}\nCompany: ${formData.company}\nMessage: ${formData.message}`,
   html: `<!DOCTYPE html>
@@ -190,7 +193,7 @@ const adminEmailResponse = await sendEmailSengrid({
     <tr>
         <td style="padding: 0; width: 60%; vertical-align: middle;border: none">
         <p style="margin: 0; padding: 75px 20px 0px 20px; font-weight: bold; font-style: italic; color: black;">
-            Dear Ms. Rebecca E. McNeal
+            Dear ${formData.full_name}
         </p>
         </td>
         <td style="padding: 0; width: 40%; text-align: right;border: none">
@@ -219,10 +222,10 @@ const adminEmailResponse = await sendEmailSengrid({
         <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 10px;">
         <tr>
             <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
-              <strong>PREPARED FOR:</strong> Ms. Rebecca E. McNeal
+              <strong>PREPARED FOR:</strong> ${formData.full_name}
             </td>
             <td style="padding: 8px 0; font-size: 14px;border:none;"> 
-              <strong> DATE:</strong> May 3, 2025    
+              <strong> DATE:</strong>${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} 
             </td>
         </tr>
         <tr>
@@ -244,9 +247,9 @@ const adminEmailResponse = await sendEmailSengrid({
           </thead>
           <tbody>
             <tr>
-              <td>Primary Backpacks</td>
+              <td>${formData.product_title}</td>
               <td>
-                <img src="logo.png" alt="Product" class="product-image" style="max-width: 200px; margin-top: 5px;" />
+              <img src="${imageUrl}" alt="Product" class="product-image" style="width: 100px; height: 100px; margin-top: 5px;" />
             </tr>
           </tbody>
         </table>
@@ -263,25 +266,16 @@ const adminEmailResponse = await sendEmailSengrid({
         <tbody>
             <tr>
             <td>BG01040</td>
-            <td>$22.97</td>
-            <td>100</td>
-            <td>$2297.00</td>
+            <td>${formData.product_price}</td>
+            <td>${formData.quantity}</td>
+            <td>${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
             </tr>
             <tr>
-            <td>MG01007</td>
-            <td>$14.00</td>
-            <td>1</td>
-            <td>$14.00</td>
-            </tr>
-            <tr>
-            <td>PEN01035</td>
-            <td>$35.00</td>
-            <td>1</td>
-            <td>$35.00</td>
+           
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">SUBTOTAL</td>
-            <td>$2346.95</td>
+            <td>${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">DISCOUNT</td>
@@ -357,8 +351,7 @@ const adminEmailResponse = await sendEmailSengrid({
     </div>
   </div>
 </body>
-</html>
-`,
+</html>`,
 });
 if (!adminEmailResponse.success) {
   console.error("❌ Email failed to send:", adminEmailResponse.error);
@@ -368,11 +361,10 @@ if (!adminEmailResponse.success) {
 // Send email to User (confirmation email)
 const userEmailResponse = await sendEmailSengrid({
   userType: "customer",
-  to: "mtesting359@gmail.com", // Replace with formData.email for production
+  to: "anamika.b@ultratend.com", // Replace with formData.email for production
   subject: "Your Quote Request Received",
   text: `Hello ${formData.full_name}`,
-  html: `
-<!DOCTYPE html>
+  html: `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8" />
@@ -522,7 +514,7 @@ const userEmailResponse = await sendEmailSengrid({
     <tr>
         <td style="padding: 0; width: 60%; vertical-align: middle;border: none">
         <p style="margin: 0; padding: 75px 20px 0px 20px; font-weight: bold; font-style: italic; color: black;">
-            Dear Ms. Rebecca E. McNeal
+            Dear ${formData.full_name}
         </p>
         </td>
         <td style="padding: 0; width: 40%; text-align: right;border: none">
@@ -550,10 +542,10 @@ const userEmailResponse = await sendEmailSengrid({
         <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse: collapse; margin-bottom: 10px;">
         <tr>
             <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
-              <strong>PREPARED FOR:</strong> Ms. Rebecca E. McNeal
+              <strong>PREPARED FOR:</strong> ${formData.full_name}
             </td>
             <td style="padding: 8px 0; font-size: 14px;border:none;"> 
-              <strong> DATE:</strong> May 3, 2025    
+              <strong> DATE:</strong> ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}    
             </td>
         </tr>
         <tr>
@@ -575,9 +567,9 @@ const userEmailResponse = await sendEmailSengrid({
           </thead>
           <tbody>
             <tr>
-              <td>Primary Backpacks</td>
+              <td>${formData.product_title}</td>
               <td>
-                <img src="logo.png" alt="Product" class="product-image" style="max-width: 200px; margin-top: 5px;" />
+                <img src="${imageUrl}" alt="Product" class="product-image" style="width: 100px; height: 100px; margin-top: 5px;" />
             </tr>
           </tbody>
         </table>
@@ -594,15 +586,15 @@ const userEmailResponse = await sendEmailSengrid({
         <tbody>
             <tr>
             <td>BG01040</td>
-            <td>$22.97</td>
-            <td>100</td>
-            <td>$2297.00</td>
+            <td>${formData.product_price}</td>
+            <td>${formData.quantity}</td>
+            <td>${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
             </tr>
             <tr>
             
             <tr class="subtotal-section">
             <td colspan="3">SUBTOTAL</td>
-            <td>$2346.95</td>
+            <td>${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">DISCOUNT</td>
@@ -678,9 +670,7 @@ const userEmailResponse = await sendEmailSengrid({
     </div>
   </div>
 </body>
-</html>
-
-`,
+</html>`,
 });
 
   if (!userEmailResponse.success) {
