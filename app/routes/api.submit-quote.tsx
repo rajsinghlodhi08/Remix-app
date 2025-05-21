@@ -41,17 +41,19 @@ const quantity = parseInt(formData.quantity, 10);
   
   const discountPercentage = discountTier ? discountTier.percentage : 0;
   const discountAmount = (parseFloat(formData.product_price) * discountPercentage) / 100;
-  console.log("Discount Amount:", discountAmount);
-
+  
   const totalPrice = parseFloat(formData.product_price) * quantity - discountAmount;
-  console.log("Total Price:", totalPrice);
+ 
   const totalTax = (totalPrice * 0.20).toFixed(2); // Assuming a 5% tax rate
   const grandTotal = (totalPrice + parseFloat(totalTax)).toFixed(2);
 
   // Send email to Admin
 const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
-  to: "rajsinghlodhi08@gmail.com", // Admin email
+  to : [
+    "anamika.b@ultratend.com",
+    "rajendra.s@ultratend.com",
+  ],
   subject: "New Quote Request",
   text: `New quote request from ${formData.full_name} (${formData.email}).\n\nProduct: ${formData.product_title}\nQuantity: ${formData.quantity}\nPrice: ${formData.product_price}\nCompany: ${formData.company}\nMessage: ${formData.message}`,
   html: `<!DOCTYPE html>
@@ -388,7 +390,7 @@ if (!adminEmailResponse.success) {
 // Send email to User (confirmation email)
 const userEmailResponse = await sendEmailSengrid({
   userType: "customer",
-  to: "rajsinghlodhi08@gmail.com", // Replace with formData.email for production
+  to: formData.email, //"rajsinghlodhi08@gmail.com", // Replace with formData.email for production
   subject: "Know Your Quote Evaluation",
   text: `Hello ${formData.full_name}`,
   html: `<!DOCTYPE html>

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 interface EmailOptions {
   userType?: string;
-  to: string;
+  to: string | string[]
   subject: string;
   text: string;
   html: string;
