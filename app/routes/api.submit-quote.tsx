@@ -43,11 +43,11 @@ const quantity = parseInt(formData.quantity, 10);
   const discountAmount = (parseFloat(formData.product_price) * discountPercentage) / 100;
   
   const totalPriceSum = parseFloat(formData.product_price) * quantity;
-  // const totalPrice = totalPriceSum - discountAmount;
- 
+
   const totalTax = (totalPriceSum * 0.20).toFixed(2); // Assuming a 5% tax rate
-  
-  const grandTotal = (totalPriceSum) - discountAmount + parseFloat(totalTax).toFixed(2);
+  const lTotal = (totalPriceSum - discountAmount + parseFloat(totalTax));
+  const grandTotal = lTotal.toFixed(2);
+
 
   const taxVat = 20;
   // Send email to Admin
