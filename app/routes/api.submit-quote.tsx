@@ -243,18 +243,18 @@ const adminEmailResponse = await sendEmailSengrid({
         </tr>
          <tr>
             <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
-              <strong>Company :</strong> ${formData.company}
+              <strong>COMPANY :</strong> ${formData.company}
             </td>
             <td style="padding: 8px 0; font-size: 14px;border:none;"> 
-              <strong> Email :</strong>${formData.email} 
+              <strong>EMAIL : </strong>${formData.email} 
             </td>
         </tr>
          <tr>
             <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
-              <strong>Phone Number :</strong> ${formData.phone}
+              <strong>PHONE NUMBER : </strong> ${formData.phone}
             </td>
             <td style="padding: 8px 0; font-size: 14px;border:none;"> 
-              <strong> Message:</strong>${formData.message} 
+              <strong>MESSAGE : </strong>${formData.message} 
             </td>
         </tr>
         <tr>
@@ -295,9 +295,9 @@ const adminEmailResponse = await sendEmailSengrid({
         <tbody>
             <tr>
             <td>${formData.sku}</td>
-            <td>$ ${formData.product_price}</td>
+            <td>$${formData.product_price}</td>
             <td>${formData.quantity}</td>
-            <td>$ ${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
+            <td>$${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
             </tr>
             <tr>
            
@@ -316,7 +316,7 @@ const adminEmailResponse = await sendEmailSengrid({
             </tr>
             <tr class="subtotal-section" style="background-color:#007ca3; color:white;">
             <td colspan="3">GRAND SERVICE TOTAL PRICE</td>
-            <td>$ ${grandTotal}</td>
+            <td>$${grandTotal}</td>
             </tr>
         </tbody>
         </table>
@@ -574,23 +574,23 @@ const userEmailResponse = await sendEmailSengrid({
               <strong>PREPARED FOR:</strong> ${formData.full_name}
             </td>
             <td style="padding: 8px 0; font-size: 14px;border:none;"> 
-              <strong> DATE:</strong> ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}    
+              <strong> DATE : </strong> ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}    
             </td>
         </tr>
         <tr>
             <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
-              <strong>Company :</strong> ${formData.company}
+              <strong>COMPANY : </strong> ${formData.company}
             </td>
             <td style="padding: 8px 0; font-size: 14px;border:none;"> 
-              <strong> Email :</strong>${formData.email} 
+              <strong>EMAIL : </strong>${formData.email} 
             </td>
         </tr>
          <tr>
             <td colspan="2" style="padding: 8px 0; font-size: 14px;border:none;">
-              <strong>Phone Number :</strong> ${formData.phone}
+              <strong>PHONE NUMBER : </strong> ${formData.phone}
             </td>
             <td style="padding: 8px 0; font-size: 14px;border:none;"> 
-              <strong> Message:</strong>${formData.message} 
+              <strong>MESSAGE : </strong>${formData.message} 
             </td>
         </tr>
         <tr>
