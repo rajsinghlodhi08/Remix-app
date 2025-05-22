@@ -46,7 +46,7 @@ const quantity = parseInt(formData.quantity, 10);
  
   const totalTax = (totalPrice * 0.20).toFixed(2); // Assuming a 5% tax rate
   const grandTotal = (totalPrice + parseFloat(totalTax)).toFixed(2);
-
+  const taxVat = 20;
   // Send email to Admin
 const adminEmailResponse = await sendEmailSengrid({
   userType: "admin",
@@ -312,7 +312,7 @@ const adminEmailResponse = await sendEmailSengrid({
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">TAX</td>
-            <td>5%</td>
+            <td>${taxVat}%</td>
             </tr>
             <tr class="subtotal-section" style="background-color:#007ca3; color:white;">
             <td colspan="3">GRAND SERVICE TOTAL PRICE</td>
@@ -647,7 +647,7 @@ const userEmailResponse = await sendEmailSengrid({
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">TAX</td>
-            <td>5%</td>
+            <td>${taxVat}%</td>
             </tr>
             <tr class="subtotal-section" style="background-color:#007ca3; color:white;">
             <td colspan="3">GRAND SERVICE TOTAL PRICE</td>
