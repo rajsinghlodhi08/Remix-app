@@ -42,10 +42,13 @@ const quantity = parseInt(formData.quantity, 10);
   const discountPercentage = discountTier ? discountTier.percentage : 0;
   const discountAmount = (parseFloat(formData.product_price) * discountPercentage) / 100;
   
-  const totalPrice = parseFloat(formData.product_price) * quantity - discountAmount;
+  const totalPriceSum = parseFloat(formData.product_price) * quantity;
+  // const totalPrice = totalPriceSum - discountAmount;
  
-  const totalTax = (totalPrice * 0.20).toFixed(2); // Assuming a 5% tax rate
-  const grandTotal = (totalPrice + parseFloat(totalTax)).toFixed(2);
+  const totalTax = (totalPriceSum * 0.20).toFixed(2); // Assuming a 5% tax rate
+  
+  const grandTotal = (totalPriceSum) - discountAmount + parseFloat(totalTax).toFixed(2);
+
   const taxVat = 20;
   // Send email to Admin
 const adminEmailResponse = await sendEmailSengrid({
@@ -297,14 +300,14 @@ const adminEmailResponse = await sendEmailSengrid({
             <td>${formData.sku}</td>
             <td>$${formData.product_price}</td>
             <td>${formData.quantity}</td>
-            <td>$${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
+            <td>$${totalPriceSum}</td>
             </tr>
             <tr>
            
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">SUBTOTAL</td>
-            <td>$ ${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
+            <td>$ ${totalPriceSum}</td>
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">DISCOUNT</td>
@@ -633,13 +636,13 @@ const userEmailResponse = await sendEmailSengrid({
             <td>${formData.sku}</td>
             <td>$ ${formData.product_price}</td>
             <td>${formData.quantity}</td>
-            <td>$ ${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
+            <td>$ ${totalPriceSum}</td>
             </tr>
             <tr>
             
             <tr class="subtotal-section">
             <td colspan="3">SUBTOTAL</td>
-            <td>$ ${parseFloat(formData.product_price) * parseInt(formData.quantity)}</td>
+            <td>$ ${totalPriceSum}</td>
             </tr>
             <tr class="subtotal-section">
             <td colspan="3">DISCOUNT</td>
